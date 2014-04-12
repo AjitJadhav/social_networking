@@ -1,8 +1,12 @@
 SocialNetworking::Application.routes.draw do
+  devise_for :users
+  
+  resources :home
+  
   resources :users do
-      member do
+     
         resources :posts 
-      end
+     
   end
  
   get "likes/index"
@@ -19,13 +23,12 @@ SocialNetworking::Application.routes.draw do
 
   #get "users/index"
    
-  resources :login do
-    collection do
-      post :authenticate
-      get :logout
-      #post :signin
-    end   
-  end 
+  #resources :login do
+  #  collection do
+  #    post :authenticate
+  #    get :logout
+  #   end   
+  #end 
   
   # get "/user/:id/post/new", :to => "posts#new", :as => :ajit
   # The priority is based upon order of creation:
@@ -77,7 +80,7 @@ SocialNetworking::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-   root :to => 'login#index'
+    root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 

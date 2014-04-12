@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140410093553) do
+ActiveRecord::Schema.define(:version => 20140411084235) do
 
   create_table "friends", :force => true do |t|
     t.integer  "user_id"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20140410093553) do
     t.integer  "user_id"
     t.boolean  "comment"
     t.integer  "post_id"
-    t.string   "number_of_likes"
+    t.integer  "number_of_likes"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
@@ -47,11 +47,21 @@ ActiveRecord::Schema.define(:version => 20140410093553) do
   create_table "users", :force => true do |t|
     t.string   "name"
     t.date     "date_of_birth"
-    t.string   "email"
-    t.string   "password"
-    t.string   "password_confirmation"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0,  :null => false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

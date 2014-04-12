@@ -1,4 +1,4 @@
-class UsersController < LoginController
+class UsersController < ApplicationController
   
   def index
     @users = User.all
@@ -10,7 +10,6 @@ class UsersController < LoginController
 
   def new
     @user = User.new
-
     respond_to do |format|
       format.html # new.html.erb
       

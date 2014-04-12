@@ -1,0 +1,16 @@
+<% if user_signed_in?%>
+<h3>post here</h3>
+<%= form_for([current_user,current_user.posts.build]) do |f| %>
+  <div class="field">
+    <%= f.label :Status %>&nbsp;>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :Photo %>&nbsp;>
+    <%= f.file_field :image %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<% end %>

@@ -1,0 +1,9 @@
+
+ 
+<p>
+  <strong>Status ></strong>
+  <%= @post.status%>
+</p>
+
+
+

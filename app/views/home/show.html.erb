@@ -1,0 +1,13 @@
+<p id="notice"> <%= notice %> </p>
+<%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
+<%= if user_signed_in? %>
+  <h2>Current haapenings...</h2>
+
+
+<%= else %>
+
+<h1> welcome Social Networking Site!</h1>
+<%= link_to "Sign In", new_user_session_path, :method => :get %>
+<%= link_to "Sign up", new_user_registration_path, :method => :get %>
+
+<% end %>

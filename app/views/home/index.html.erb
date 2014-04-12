@@ -1,0 +1,16 @@
+<% if user_signed_in? %>
+<p id="notice"><%= notice %></p>
+<%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
+<h5 align=""> welcome <%= current_user.name %> </h5>
+<%= render 'form' %>
+<% @posts.each do |p|%>
+<%= p.status %></br>
+<% end%>
+
+<% else %>
+<p id="notice"><%= notice %></p>
+<h1> welcome Social Networking Site!</h1>
+<%= link_to "Sign In", new_user_session_path, :method => :get %>
+<%= link_to "Sign up", new_user_registration_path, :method => :get %>
+
+<% end %>

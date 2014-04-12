@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_filter :authenticate_user!
+  
   def index
   end
 
@@ -11,12 +13,12 @@ class PostsController < ApplicationController
   end 
 
   def create 
-   # debugger
     @user = User.find(params[:user_id])
     @post = @user.posts.create(params[:post])
     
     if @post.save
       flash[:notice] = "Post was created successfully."
+      redirect_to home_index_path
     end  
   end
   
@@ -30,6 +32,7 @@ class PostsController < ApplicationController
   end
   
   def show
+    @posts = Post.select(:status).where("user_id => ?",params[:user_id]).orderby(created_at: :desc)
   end
   
 end

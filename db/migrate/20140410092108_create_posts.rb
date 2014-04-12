@@ -6,7 +6,7 @@ class CreatePosts < ActiveRecord::Migration
       t.references :user
       t.boolean :comment
       t.references :post
-      t.string :number_of_likes
+      t.integer :number_of_likes
 
       t.timestamps
     end
