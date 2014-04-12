@@ -23,12 +23,7 @@ SocialNetworking::Application.routes.draw do
 
   #get "users/index"
    
-  #resources :login do
-  #  collection do
-  #    post :authenticate
-  #    get :logout
-  #   end   
-  #end 
+
   
   # get "/user/:id/post/new", :to => "posts#new", :as => :ajit
   # The priority is based upon order of creation:
