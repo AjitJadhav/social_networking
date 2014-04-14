@@ -32,7 +32,6 @@ class PostsController < ApplicationController
   end
   
   def show
-    @posts = Post.select(:status).where("user_id => ?",params[:user_id]).orderby(created_at: :desc)
   end
   
 end

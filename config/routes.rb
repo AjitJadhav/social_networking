@@ -4,28 +4,18 @@ SocialNetworking::Application.routes.draw do
   resources :home
   
   resources :users do
-     
-        resources :posts 
-     
+    resources :posts
+    resources :friends 
   end
  
   get "likes/index"
 
   get "friends/index"
 
-  #get "posts/index"
-
   get "profile/index"
-
-  get "login/index"
   
   
-
-  #get "users/index"
-   
-
-  
-  # get "/user/:id/post/new", :to => "posts#new", :as => :ajit
+   put "/add_friend", :to => "friends#add_friend", :as => :add_friend
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

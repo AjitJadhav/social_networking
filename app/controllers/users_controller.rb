@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
   
   def index
-    @users = User.all
+    if user_signed_in?
+      @users = User.all
+      render 'index'
+    else
+      redirect_to home_index_path
+    end  
   end
 
   def show

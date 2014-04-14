@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   before_filter :all_friends_posts, :only => :index
   
   def index
+    
   end
   
   def create
