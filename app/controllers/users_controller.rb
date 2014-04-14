@@ -1,12 +1,10 @@
 class UsersController < ApplicationController
   
+  before_filter :authenticate_user!
+  before_filter :add_friends, :only => :index
+  
   def index
-    if user_signed_in?
-      @users = User.all
-      render 'index'
-    else
-      redirect_to home_index_path
-    end  
+    
   end
 
   def show
@@ -62,7 +60,16 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
   
+  def add_friends
+    @friends = current_user.friends
+    
+    friend_ids = @friends.map(&:friend_with)
+    friend_ids << current_user.id
+    @users = User.where("id NOT IN (?)", friend_ids)
+  end
  
   
 end

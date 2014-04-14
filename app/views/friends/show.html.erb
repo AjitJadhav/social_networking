@@ -1,4 +1,4 @@
-<h2> List of your friends </h2>
+
 <table>
   <tr>
     <th>Name</th>
@@ -9,19 +9,18 @@
     <th></th>
   </tr>
 
-  <% @users.each do |friend| %>
+  <% @friends.each do |friend| %>
     
       <tr>
-       
+        <td><%= friend.id %> </td>
         <td><%= friend.name %></td>
         <td><%= friend.date_of_birth %></td>
         <td><%= friend.email %></td>
-        <% if friend? %>
-          <%= link_to "reomve friend"%>
-        <% else %>
-          <p>friend request not accepted</p>&nbsp;
-          <% link_to "remove request"%>
-        <% end %>
+        <td>
+          <div class="actions">
+            <%= f.submit value="Remove Friend" %>
+          </div>
+        </td>
       </tr>
     
   <% end %>

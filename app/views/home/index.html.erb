@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <% if user_signed_in? %>
-  <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
-  <%= link_to "Find Friends", users_path %>
+  <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>&nbsp;
+  <%= link_to "Find Friends", users_path %>&nbsp;
+  <%= link_to "View Friends", friends_path %>
   <h5 align=""> welcome <%= current_user.name %> </h5>
   <%= render 'form' %>
   <% @posts.each do |p|%>

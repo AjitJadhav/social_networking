@@ -5,7 +5,9 @@ SocialNetworking::Application.routes.draw do
   
   resources :users do
     resources :posts
-    resources :friends 
+    collection do
+      resources :friends 
+    end  
   end
  
   get "likes/index"

@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  before_filter :authenticate_user! 
   before_filter :all_friends_posts, :only => :index
   
   def index
@@ -28,8 +29,6 @@ class HomeController < ApplicationController
   private 
   
   def all_friends_posts 
-    if user_signed_in?
-      @posts = current_user.posts.order("created_at DESC")
-    end
+    @posts = current_user.posts.order("created_at DESC")
   end
 end
