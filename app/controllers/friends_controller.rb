@@ -1,11 +1,11 @@
 class FriendsController < ApplicationController
   include ApplicationHelper  
-  #before_filter :all_friends, :only => :index
+  before_filter :all_friends, :only => :index
   
   def index
-    @friend_ids = Friend.where("friend_with = ?", current_user.id)
-    friends = @friend_ids.map(&:user_id)
-    @users = User.where("id in (?)",friends) 
+  #  @friend_ids = Friend.where("friend_with = ?", current_user.id)
+  #  friends = @friend_ids.map(&:user_id)
+    @users = User.where("id in (?)",@friend_ids) 
   end
   
   def show
@@ -37,11 +37,11 @@ class FriendsController < ApplicationController
   end
   
   def all_friends
-    f1 = current_user.friends.where("request_accepted = true")
-    f2 = Friend.where("friend_with = ? and request_accepted = ?", current_user.id, true)
-    f3 = f1.map(&:friend_with)
-    f4 = f2.map(&:user_id)
-    @friend_ids = f3 + f4
+    f1 = current_user.friends.pluck(:friend_with)
+    f2 = Friend.where("friend_with = ?", current_user.id).pluck(:user_id)
+    @friend_ids = f1 + f2
+    #debugger
+    @friend_ids
   end
   
 end
