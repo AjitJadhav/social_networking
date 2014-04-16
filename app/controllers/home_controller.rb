@@ -29,6 +29,8 @@ class HomeController < ApplicationController
   private 
   
   def all_friends_posts 
+    user_friend_with = Friend.select(:friend_with).where("user_id = ? and request_accepted = ?",current_user.id,true)
+    user_friend_of = Friend.select(:user_id).where("friend_with = ? and request_accepted = ?",current_user.id,true)
     @posts = current_user.posts.order("created_at DESC")
   end
 end

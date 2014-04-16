@@ -65,7 +65,6 @@ class UsersController < ApplicationController
   
   def add_friends
     @friends = current_user.friends
-    
     friend_ids = @friends.map(&:friend_with)
     friend_ids << current_user.id
     @users = User.where("id NOT IN (?)", friend_ids)

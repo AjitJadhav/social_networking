@@ -16,8 +16,8 @@ SocialNetworking::Application.routes.draw do
 
   get "profile/index"
   
-  
-   put "/add_friend", :to => "friends#add_friend", :as => :add_friend
+    put "/respond", :to => "friends#respond_request", :as => :respond
+    put "/add_friend", :to => "friends#add_friend", :as => :add_friend
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

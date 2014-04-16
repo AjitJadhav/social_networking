@@ -6,6 +6,8 @@ gem 'debugger', '1.6.6'
 
 gem 'bcrypt', '3.1.7'
 
+gem 'carrierwave', '0.10.0'
+
 gem 'devise', '~> 3.2.4'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

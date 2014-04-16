@@ -1,6 +1,8 @@
+<p id="notice"> <%= notice %> </p>
 <h2> List of your friends </h2>
 <table>
   <tr>
+    <th>id</th>
     <th>Name</th>
     <th>Date of birth</th>
     <th>Email</th>
@@ -10,20 +12,20 @@
   </tr>
 
   <% @users.each do |friend| %>
-    
+    <%= form_for @current_user,:url => respond_path(:friend_id => friend.id ) do |f| %>
       <tr>
-       
+        <td><%= friend.id %></td>
         <td><%= friend.name %></td>
         <td><%= friend.date_of_birth %></td>
         <td><%= friend.email %></td>
-        <% if friend? %>
-          <%= link_to "reomve friend"%>
-        <% else %>
-          <p>friend request not accepted</p>&nbsp;
-          <% link_to "remove request"%>
-        <% end %>
+        <td>
+          <% text = f_friend?(friend)%>
+          <div class="actions">
+            <%= f.submit value="#{text}" %>
+          </div>
+        </td>
       </tr>
-    
+    <% end %>
   <% end %>
 </table>
 
