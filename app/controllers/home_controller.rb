@@ -7,17 +7,7 @@ class HomeController < ApplicationController
   end
   
   def create
-    
-    @user = current_user[:user_id]
-    @post = @user.posts.create(parmas[:post])
-     
-    if @post.save
-      flash.now[:notice] = "your post was successful."
-      render :index
-    else
-      flash.now[:notice] = "post was unsuccessful. Please try again later. "
-      render :index
-    end
+   
   end
   
   def show
@@ -29,8 +19,9 @@ class HomeController < ApplicationController
   private 
   
   def all_friends_posts 
-    user_friend_with = Friend.select(:friend_with).where("user_id = ? and request_accepted = ?",current_user.id,true)
-    user_friend_of = Friend.select(:user_id).where("friend_with = ? and request_accepted = ?",current_user.id,true)
-    @posts = current_user.posts.order("created_at DESC")
+    f1 = current_user.friends.pluck(:friend_with)
+    f2 = Friend.where("friend_with = ?", current_user.id).pluck(:user_id)
+    @friend_ids = f1 + f2 << current_user.id
+    @posts = Post.where("user_id in (?)",@friend_ids).order("created_at DESC")
   end
 end

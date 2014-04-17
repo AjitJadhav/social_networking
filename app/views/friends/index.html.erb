@@ -19,7 +19,7 @@
         <td><%= friend.date_of_birth %></td>
         <td><%= friend.email %></td>
         <td>
-          <% text = f_friend?(friend)%>
+          <% text = is_friend?(friend)%>
           <div class="actions">
             <%= f.submit value="#{text}" %>
           </div>

@@ -15,7 +15,6 @@ class PostsController < ApplicationController
   def create 
     @user = User.find(params[:user_id])
     @post = @user.posts.create(params[:post])
-    
     if @post.save
       flash[:notice] = "Post was created successfully."
       redirect_to home_index_path

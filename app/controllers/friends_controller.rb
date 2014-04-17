@@ -1,5 +1,6 @@
 class FriendsController < ApplicationController
   include ApplicationHelper  
+  before_filter :authenticate_user!
   before_filter :all_friends, :only => :index
   
   def index
@@ -24,9 +25,9 @@ class FriendsController < ApplicationController
   end
   
   def respond_request
-    
+   # debugger
     current_friend_id = Friend.select(:id).where("user_id = ? and friend_with = ?", params[:friend_id], current_user.id)
-    if Friend.where("friend_with = ? and request_accepted = ?",current_user.id, true).present?
+    if Friend.where("friend_with = ? and user_id = ? and request_accepted = ?",current_user.id, params[:friend_id], true).present?
       Friend.delete(current_friend_id) 
       flash[:notice] = "friend removed from your list."
     else
@@ -40,8 +41,7 @@ class FriendsController < ApplicationController
     f1 = current_user.friends.pluck(:friend_with)
     f2 = Friend.where("friend_with = ?", current_user.id).pluck(:user_id)
     @friend_ids = f1 + f2
-    #debugger
-    @friend_ids
+   
   end
   
 end

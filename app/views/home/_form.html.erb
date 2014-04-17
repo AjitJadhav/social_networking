@@ -1,22 +1,32 @@
 <% if user_signed_in? %>
-  <h3>post here</h3>
-  
-  <%= form_for([current_user,current_user.posts.build]) do |f| %>
-    <div class="field">
-      <%= f.label :Status %>&nbsp;:
-      <%= f.text_field :status %>
-    </div>
-<%
-=begin%>
-    <div class="field">
-      <%= f.label :Photo %>:
-      <%= f.file_field :image %>
-    </div>
-<%
-=end%>    
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-  <% end %>
-  
+  <table> 
+    <tr>
+      <td colspan='2'>
+        <h3>Create Post from here....</h3>
+      </td>
+    </tr>  
+    <tr>
+      <td>
+        <%= form_for(([current_user,current_user.posts.build]), :html => { :multipart => true, :method => "post"}) do |f| %>
+          <div class="field">
+            <%= f.label :Status %>&nbsp;:
+            <%= f.text_field :status %>
+          </div>
+      </td>
+      <td>
+        <div class="field">
+         &nbsp;&nbsp; &nbsp;&nbsp;<%= f.label :Photo %>:
+          <%= f.file_field :image %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan='2'>
+        <div class="actions">
+          <%= f.submit %>
+          <% end %>
+        </div>
+      </td>
+    </tr> 
+  </table>
 <% end %>
