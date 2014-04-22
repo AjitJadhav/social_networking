@@ -1,0 +1,15 @@
+<table>
+<% if @comments.present? %>
+  <% @comments.each do |comment| %>
+    <tr>  
+      <td>
+        <%= comment.user.name if comment.user.present? %>
+      </td>
+      <td>
+        <%= comment.status if comment.stauts.present? %>
+        <%= image_tag comment.image, :height => '100', :width => '200' if comment.status.present? %>
+      </td>
+    </tr>
+  <% end %>
+<% end %>
+</table>

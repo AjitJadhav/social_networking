@@ -1,11 +1,31 @@
-
- 
-<p>
-  <strong>Status ></strong>
+<table align="left">
   <% @posts.each do |post|%>
-  <%= post%>
-  <% end%>
-</p>
-
-
+    <tr height=50px>
+      <td>
+        <%= post.user.name %> -->
+      </td>
+      <td>
+        <%= post.status if post.status.present? %></br>
+        <%= image_tag post.image, :height => '300', :width => '400' if post.image.present? %>
+      </td>
+      <td>
+        <% if post.user.id == current_user.id %>
+          <%= link_to 'Destroy', post_path(post), :method => :delete %>
+        <% end %>
+      </td>
+    </tr>  
+    
+    <tr>  <td></td>
+      <td>
+        <%= render partial: 'comments/preview', locals: { :comments => post.comments.order("created_at ASC").limit(5) } %>
+      </td> <td></td>  
+    </tr>  
+    <tr>  <td></td>
+      <td>
+        <%= render partial: 'comments/form', locals: { post_id: post.id } %>
+      </td> <td></td>  
+    </tr>  
+    
+  <% end %>
+</table>
 

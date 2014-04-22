@@ -1,0 +1,18 @@
+<table >
+  <% @posts.each do |post|%>
+    <tr height=50px>
+      <td>
+        <%= post.user.name %> -->
+      </td>
+      <td>
+        <%= post.status if post.status.present? %></br>
+        <%= image_tag post.image, :height => '300', :width => '400' if post.image.present? %>
+      </td>
+      <td>
+        <% if post.user.name == current_user.name %>
+          <%= link_to 'Destroy', [post.user, post], :method => :delete, :data => { :confirm => 'Are you sure?' } %>
+        <% end %>
+      </td>
+    </tr>    
+  <% end %>
+</table>

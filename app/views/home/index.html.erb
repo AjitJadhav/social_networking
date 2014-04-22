@@ -1,44 +1,14 @@
-<p id="notice"><%= notice %></p>
+<body>
+
 
 <% if user_signed_in? %>
-  <table >
-    <tr>
-      <td>  
-        <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>&nbsp;
-      </td>
-      <td>  
-        <%= link_to "Find Friends", users_path %>&nbsp;
-      </td>
-      <td>
-        <%= link_to "View Friends", friends_path %>
-      </td>  
-      <td align="center" width='500'>
-        <h4>!  This is your wall  ! </h4>
-      </td>
-      <td align="right" width='500' >
-        <h2 > Welcome <%= current_user.name %> </h2>
-      </td>  
-     </tr>    
-  </table>
-
+  </br></br></br></br>
+  <p id="notice"><%= notice %></p>
+  <%= render 'header1'%>
+  
   <%= render 'form' %>
   
-  <table>
-    <% @posts.each do |p|%>
-      <tr height=50px>
-        <td>
-          <%= p.user.name %> -->
-        </td>
-        <td>
-          <%= p.status if p.status.present? %></br>
-          <%= image_tag p.image, :height => '300', :width => '400' if p.image.present? %>
-        </td>
-      </tr>    
-    <% end %>
-  </table>
+  <%= render 'posts/post' %>
   
-<% else %>
-  <h1> welcome Social Networking Site!</h1>
-  <%= link_to "Sign In", new_user_session_path %>
-  <%= link_to "Sign up", new_user_registration_path %>
 <% end %>
+</body>

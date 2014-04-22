@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
   
   before_filter :authenticate_user!
+  #before_filter :all_friends
   before_filter :add_friends, :only => :index
   
   def index
-    
+    @users = User.where("id NOT IN (?)", @friend_ids)
   end
 
   def show
@@ -64,10 +65,11 @@ class UsersController < ApplicationController
   private
   
   def add_friends
-    @friends = current_user.friends
-    friend_ids = @friends.map(&:friend_with)
-    friend_ids << current_user.id
-    @users = User.where("id NOT IN (?)", friend_ids)
+    f1 = current_user.friends.pluck(:friend_with)
+    f2 = Friend.where("friend_with = ?", current_user.id).pluck(:user_id)
+    @friend_ids = f1 + f2
+    @friend_ids << current_user.id
+    @users = User.where("id NOT IN (?)", @friend_ids)
   end
  
   

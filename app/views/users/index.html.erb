@@ -1,4 +1,6 @@
-<p id="notice"> <%= notice %> </p>
+<%= render 'home/header1' %>
+</br></br></br></br>
+<p id="notice"><%= notice %></p>
 <h2>People you may know.</h2>
 
 <table>
@@ -13,24 +15,25 @@
   </tr>
 
   <% @users.each do |user| %>
-    <%= form_for @current_user,:url => add_friend_path(:friend_id => user.id) do |f| %>
-      <tr>
-        <td><%= user.id %> </td>
-        <td><%= user.name %></td>
-        <td><%= user.date_of_birth %></td>
-        <td><%= user.email %></td>
-        <td>
-          <div class="actions">
+    
+    <% if is_not_requested?(user) %>
+      <%= form_for @current_user,:url => add_friend_path(:friend_id => user.id) do |f| %>
+        <tr>
+          <td><%= user.id %> </td>
+          <td><%= user.name %></td>
+          <td><%= user.date_of_birth %></td>
+          <td><%= user.email %></td>
+          <td>
+            <div class="actions">
             <%= f.submit value="Add Friend" %>
-          </div>
-        </td>
-      </tr>
-    <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>    
   <% end %>
 </table>
 
 <br />
 
 
-<%= link_to "Sign Out", destroy_user_session_path, :method => :delete %> |
-<%= link_to 'back', home_index_path %>

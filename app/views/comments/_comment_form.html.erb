@@ -1,0 +1,24 @@
+
+<%= form_for current_user, :url => new_user_post_comment_path, :html => { :multipart => true} do |f| %>
+  
+  
+  <div class="field">
+    <%= f.label :commenter %><br />
+    <%= f.text_field :current_user.name %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :body %><br />
+    <%= f.text_field :body %>
+  </div>
+  
+  <div class="field">
+    &nbsp;&nbsp; &nbsp;&nbsp;<%= f.label :Photo %>:
+    <%= f.file_field :image %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  
+<% end %>
+

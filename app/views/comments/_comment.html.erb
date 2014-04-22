@@ -1,0 +1,13 @@
+
+<p> 
+  <strong>Commenter:</strong>
+  <%= post.user.name %>
+</p>
+ 
+<p>
+  <strong>Comment:</strong>
+  <%= post.staus if post.status.present? %>
+  <%= post.image if post.image.present? %>
+</p>
+
+
