@@ -1,31 +1,39 @@
-<table align="left">
-  <% @posts.each do |post|%>
-    <tr height=50px>
-      <td>
-        <%= post.user.name %> -->
-      </td>
-      <td>
-        <%= post.status if post.status.present? %></br>
-        <%= image_tag post.image, :height => '300', :width => '400' if post.image.present? %>
-      </td>
-      <td>
-        <% if post.user.id == current_user.id %>
-          <%= link_to 'Destroy', post_path(post), :method => :delete %>
-        <% end %>
-      </td>
-    </tr>  
-    
-    <tr>  <td></td>
-      <td>
-        <%= render partial: 'comments/preview', locals: { :comments => post.comments.order("created_at ASC").limit(5) } %>
-      </td> <td></td>  
-    </tr>  
-    <tr>  <td></td>
-      <td>
-        <%= render partial: 'comments/form', locals: { post_id: post.id } %>
-      </td> <td></td>  
-    </tr>  
-    
-  <% end %>
-</table>
+<% @posts.each do |post|%>
+  <div class="form-inline" role="form"> 
+    </br></br>
+    <div class="container well offset4 span4">
+      <div class="row-fluid">
+          <%= post.user.name %> posted :
+      </div>
+      <div class="row-fluid">
+        <%= post.status if post.status.present?  %></br>
+          <%= image_tag post.image, :class=> "img-rounded", :height => '300', :width => '400' if post.image.present? %>
+          <div class="row-fluid">
+            <%= post.number_of_likes if post.number_of_likes.present? && post.number_of_likes > 0 %>
+            <% if post.likes.where(:user_id => current_user.id).first.present? %>
+              <%= button_to 'Unlike', unlike_path(post), :method => :put, :class => "btn btn-danger btn-sm" %>
+            <% else %>
+              <%= button_to 'Like', post_likes_path(post), :method => :post, :class => "btn btn-warning btn-sm" %>
+            <% end %>
+          </div>
+          <% if post.user.id == current_user.id %>
+            <%= link_to 'Destroy', post_path(post), :method => :delete %>
+          <% end %>
+      </div>
+        
+      <div class="row-fluid"> 
+        <div class="span4">
+          </br><%= render partial: 'comments/preview', locals: { :comments => post.comments.order("created_at ASC").limit(5) } %>
+        </div>
+      </div> 
+      <div class="row-fluid">
+        <div class="span4">
+          </br><%= render partial: 'comments/form', locals: { post_id: post.id } %>
+        </div>  
+      </div>
+    </div>
+  </div>
+  </div>  
+<% end %>
+
 

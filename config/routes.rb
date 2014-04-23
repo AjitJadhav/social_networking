@@ -4,7 +4,6 @@ SocialNetworking::Application.routes.draw do
   resources :home
   
   resources :users do
-
     collection do
       resources :friends 
     end  
@@ -12,9 +11,12 @@ SocialNetworking::Application.routes.draw do
   
   resources :posts do
     resources :comments
+    resources :likes, :only => :create
   end
+  
+  #resources :likes
  
-  get "likes/index"
+  #get "likes/index"
 
   get "friends/index"
 
@@ -22,7 +24,7 @@ SocialNetworking::Application.routes.draw do
    
   get "comments/index"
    
-  #match "posts/comments" => "comments#create"
+  put "posts/:post_id/unlike", :to => "likes#unlike", :as => :unlike
   put "/respond", :to => "friends#respond_request", :as => :respond
   put "/add_friend", :to => "friends#add_friend", :as => :add_friend
   # The priority is based upon order of creation:

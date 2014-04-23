@@ -8,6 +8,10 @@
         <td>
           <%= comment.status if comment.status.present? %>
           <%= image_tag comment.image, :height => '100', :width => '200' if comment.image.present? %>
+           <%= link_to 'Like'%>
+            <% if comment.user.id == current_user.id %>
+              <%= link_to 'Destroy', post_path(comment), :method => :delete %>
+            <% end %>
         </td>
       </tr>
     <% end %>

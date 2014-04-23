@@ -5,9 +5,10 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :date_of_birth, :email, :name, :password, :password_confirmation          
   
+  has_many :likes
   has_many :posts
-  has_many :friends, :conditions => {:request_accepted => false}
-  has_many :pending_friend_request, :class_name => "Friend", :foreign_key => "user_id", :conditions => {:request_accepted => true }
+  has_many :friends, :conditions => {:request_accepted => true}
+  has_many :pending_friend_request, :class_name => "Friend", :foreign_key => "user_id", :conditions => {:request_accepted => false }
   
   scope :friend_of, ->(user) {
     joins(:friends).where("friends.user_id = ? OR friends.friend_with = ?", user.id, user.id)

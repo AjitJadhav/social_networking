@@ -1,32 +1,38 @@
-<% if user_signed_in? %>
-  <%= form_for(current_user.posts.build, :html => {:multipart => true, :method => "post"}) do |f| %>
-    <table> 
-      <tr>
-        <td colspan='2'>
-          <h3>Create Post from here....</h3>
-        </td>
-      </tr>  
-      <tr>
-        <td>
-          <div class="field">
-            <%= f.label :Status %>&nbsp;:
-            <%= f.text_field :status %>
+<div nav="navbar-inverse">
+  <% if user_signed_in? %>
+    <div class="container">
+      <div class="row ">
+       
+          <div class="form-inline" role="form">
+            <%= form_for(current_user.posts.build, :html => {:multipart => true, :method => "post"}) do |f| %>
+              <div class="row">
+                <div class="span3 offset3 well">
+                  <div class="form-group">
+                    <h3>Create Post from here....&nbsp;&nbsp;</h3>
+                  </div> 
+                  <div class="form-group">
+                    <div class="field">
+                      <%= f.label :Status %>&nbsp;:</br>
+                      <%= f.text_field :status %>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="field">
+                      &nbsp;&nbsp;<%= f.label :Photo %>&nbsp;:
+                      <%= f.file_field :image %>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="actions">
+                      <input type="submit" class="btn btn-success btn-sm" value="create post"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
           </div>
-        </td>
-        <td>
-          <div class="field">
-            &nbsp;&nbsp;<%= f.label :Photo %>:
-            <%= f.file_field :image %>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td colspan='2'>
-          <div class="actions">
-            <input type="submit" class="btn btn-success btn-sm" value="create post"/>
-          </div>
-        </td>
-      </tr> 
-    </table>
+        
+      </div>
+    </div>
   <% end %>
-<% end %>
+</div>

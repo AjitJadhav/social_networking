@@ -4,8 +4,7 @@ class FriendsController < ApplicationController
   before_filter :all_friends, :only => :index
   
   def index
-    @friends = User.friend_of(current_user)
-    debugger
+    @friends = User.where("id in (?)", @friend_ids)
   end
   
   def show

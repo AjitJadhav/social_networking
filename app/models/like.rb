@@ -1,4 +1,5 @@
 class Like < ActiveRecord::Base
   belongs_to :post
-  belongs_to :user
+  has_one :user
+  attr_accessible :user_id
 end

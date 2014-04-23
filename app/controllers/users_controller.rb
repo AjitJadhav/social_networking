@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   
   before_filter :authenticate_user!
-  #before_filter :all_friends
   before_filter :add_friends, :only => :index
   
   def index
@@ -15,8 +14,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     respond_to do |format|
-      format.html # new.html.erb
-      
+      format.html      
     end
   end
 
@@ -66,7 +64,7 @@ class UsersController < ApplicationController
   
   def add_friends
     f1 = current_user.friends.pluck(:friend_with)
-    f2 = Friend.where("friend_with = ?", current_user.id).pluck(:user_id)
+    f2 = current_user.pending_friend_request.pluck(:friend_with)
     @friend_ids = f1 + f2
     @friend_ids << current_user.id
     @users = User.where("id NOT IN (?)", @friend_ids)
