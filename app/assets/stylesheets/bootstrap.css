@@ -5782,4 +5782,9 @@ button.close {
     display: none !important;
   }
 }
+
+.coloring {
+  background-color: #2ba6cb;
+  padding: 0 90px;
+}
 /*# sourceMappingURL=bootstrap.css.map */

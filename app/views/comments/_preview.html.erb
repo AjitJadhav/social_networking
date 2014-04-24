@@ -1,19 +1,32 @@
-<table>
-  <% if comments.present? %>
-    <% comments.each do |comment| %>
-      <tr>  
-        <td>
+<% if comments.present? %>
+  <% comments.each do |comment| %>
+    <div class="container">  
+      <div class="col-md-12">
+        <div class="col-md-4">
           <%= comment.user.name if comment.user.present? %> ->
-        </td>
-        <td>
-          <%= comment.status if comment.status.present? %>
-          <%= image_tag comment.image, :height => '100', :width => '200' if comment.image.present? %>
-           <%= link_to 'Like'%>
-            <% if comment.user.id == current_user.id %>
-              <%= link_to 'Destroy', post_path(comment), :method => :delete %>
+            <%= comment.status if comment.status.present? %>
+            <%= image_tag comment.image, :height => '100', :width => '200' if comment.image.present? %>
+        </div>
+        
+        <div class='col-md-4'> 
+          <div class="col-md-2">
+            <%= pluralize(comment.number_of_likes,"Like") if comment.number_of_likes.present? && comment.number_of_likes > 0 %>
+          </div>
+          <div class='col-md-2'>  
+            <% if is_liked?(comment) %>
+              <%= button_to 'Unlike', unlike_path(comment), :method => :put, :class => "btn btn-danger btn-sm" %>
+            <% else %>
+              <%= button_to 'Like', post_likes_path(comment), :method => :post, :class => "btn btn-warning btn-sm" %>
             <% end %>
-        </td>
-      </tr>
-    <% end %>
+          </div>
+          <div class='col-md-2'>
+          <% if comment.user.id == current_user.id %>
+            <%= link_to 'Destroy', post_path(comment), :method => :delete %>
+          <% end %>  
+          </div>
+        </div>  
+      </div>  
+    </div>  
   <% end %>
-</table>
+<% end %>
+

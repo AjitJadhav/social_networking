@@ -1,7 +1,6 @@
 <p id="notice"> <%= notice %> </p>
 <h2>Sign up</h2>
 <div class="row">
-  :before
   <div class="span4 well">
     <%= form_for(@user) do |f| %>
       <%= devise_error_messages! %>
@@ -26,5 +25,5 @@
   
     <%= render "devise/shared/links" %>
   </div>
-  :after
+  
 </div>  
