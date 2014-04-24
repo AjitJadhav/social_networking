@@ -7,14 +7,7 @@ class FriendsController < ApplicationController
     @friends = User.where("id in (?)", @friend_ids)
   end
   
-  def show
-  end
-  
-  def edit
-  end
-  
   def add_friend
-    #if current_user.id < params[:friend_id].to_i
     if  current_user.friends.create(:friend_with => params[:friend_id],:request_accepted => false)
       flash[:notice] = "Friend request has been sent."
       redirect_to users_path

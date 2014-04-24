@@ -17,9 +17,7 @@ class LikesController < ApplicationController
   end 
    
   def unlike
-    
     post = Post.where("id = ?", params[:post_id]) 
-    
     unlike = post.first.likes(current_user).delete_all
     Post.decrement_counter(:number_of_likes, post.first.id)
     if unlike.present?
