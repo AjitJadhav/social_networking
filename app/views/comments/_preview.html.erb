@@ -9,20 +9,13 @@
         </div>
         
         <div class='col-md-4'> 
-          <div class="col-md-3">
-            <%= pluralize(comment.number_of_likes,"Like") if comment.number_of_likes.present? && comment.number_of_likes > 0 %>
+          <div class='col-md-2 likes_on_<%= comment.id %>'>
+            <%= render :partial => 'likes/like', locals: { :post => comment } %>
           </div>
-          <div class='col-md-2'>  
-            <% if is_liked?(comment) %>
-              <%= button_to 'Unlike', unlike_path(comment), :method => :put, :class => "btn btn-danger btn-sm" %>
-            <% else %>
-              <%= button_to 'Like', post_likes_path(comment), :method => :post, :class => "btn btn-warning btn-sm" %>
-            <% end %>
-          </div>
-          <div class='col-md-2'>
-          <% if comment.user.id == current_user.id %>
-            <%= link_to 'Destroy', post_path(comment), :method => :delete %>
-          <% end %>  
+          <div class='col-md-4'>
+            <% if comment.user.id == current_user.id %>
+              <%= link_to 'Destroy', post_path(comment), :method => :delete %>
+            <% end %>  
           </div>
         </div>  
       </div>  

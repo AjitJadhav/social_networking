@@ -1,0 +1,12 @@
+<div class='col-md-2'>
+  <%= post.number_of_likes %>
+</div>
+
+<div class='col-md-4'>
+  <% if is_liked?(post) %>
+    <%= button_to 'Unlike', post_likes_path(post, :unlike => true), :method => :post, :remote => true, :class => "btn btn-danger btn-sm" %>
+  <% else %>
+    <%= button_to 'Like', post_likes_path(post, :like => true), :method => :post, :remote => true, :class => "btn btn-warning btn-sm" %>
+  <% end %>
+</div>
+            

@@ -1,0 +1,2 @@
+$(".likes_on_<%= @post.id %>").html("<%= escape_javascript( render(:partial => 'likes/like', locals: { :post => @post }) ) %>");
+$("#notice").html("<%= escape_javascript( flash[:notice] )%>");
