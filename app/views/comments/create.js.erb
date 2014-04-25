@@ -1,0 +1,1 @@
+$(".preview_<%= @post.id %>").html("<%= escape_javascript( render(:partial => 'comments/preview', :locals => { :comments => @comments })) %>")

@@ -2,17 +2,17 @@
   <% comments.each do |comment| %>
     <div class="container">  
       <div class="col-md-12">
-        <div class="col-md-4">
+        <div class="col-md-2">
           <%= comment.user.name if comment.user.present? %> ->
             <%= comment.status if comment.status.present? %>
             <%= image_tag comment.image, :height => '100', :width => '200' if comment.image.present? %>
         </div>
         
-        <div class='col-md-4'> 
-          <div class='col-md-2 likes_on_<%= comment.id %>'>
+        <div class='col-md-6'> 
+          <div class='col-md-3 likes_on_<%= comment.id %>'>
             <%= render :partial => 'likes/like', locals: { :post => comment } %>
           </div>
-          <div class='col-md-4'>
+          <div class='col-md-2'>
             <% if comment.user.id == current_user.id %>
               <%= link_to 'Destroy', post_path(comment), :method => :delete %>
             <% end %>  

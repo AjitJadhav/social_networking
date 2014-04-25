@@ -25,7 +25,7 @@
       </div>
          
         
-      <div class='col-md-12'>
+      <div class='col-md-12 preview_<%= post.id %>'>
           </br><%= render partial: 'comments/preview', locals: { :comments => post.comments.order("created_at ASC").limit(5) } %>
       </div>  
       

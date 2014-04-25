@@ -2,7 +2,7 @@
   <table> 
     <tr>
       <td>
-        <%= form_tag(post_comments_path(post_id), :method => 'post', :multipart => true) do %>
+        <%= form_tag(post_comments_path(post_id), :method => 'post', :multipart => true, :remote => true) do %>
           <div class="field">
             <%= label_tag(:status, "Comment") %>&nbsp;:
             <%= text_field_tag(:status,'', size: 40, placeholder: 'Comment on this post....' ) %>
