@@ -2,7 +2,9 @@
 <% if user_signed_in? %>
   
   </br></br></br></br>
-  <p id="notice"><%= notice %></p>
+  
+  <%= render partial: 'flash', :locals => { flash: flash } %>
+  
   <%= render 'header1'%>
   
   <%= render 'form' %>

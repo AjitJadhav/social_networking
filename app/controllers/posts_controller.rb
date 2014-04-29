@@ -16,13 +16,10 @@ class PostsController < ApplicationController
     if @post.save
       flash[:notice] = "Post was created successfully."
       redirect_to home_index_path
+    else 
+      flash[:alert] = "Please provide the status."
+      redirect_to home_index_path
     end  
-  end
-  
-  def edit 
-  end
-  
-  def update
   end
   
   def destroy
@@ -31,7 +28,7 @@ class PostsController < ApplicationController
       flash[:notice] = "Post has been deleted."
       redirect_to home_index_path
     else 
-      flash[:notice] = "You don't have permission for deleting this post."
+      flash[:alert] = "You don't have permission for deleting this post."
       redirect_to home_index_path
     end 
   end   

@@ -1,1 +1,8 @@
-$(".preview_<%= @post.id %>").html("<%= escape_javascript( render(:partial => 'comments/preview', :locals => { :comments => @comments })) %>")
+$(".preview_<%= @post.id %>").html("<%= escape_javascript( render(:partial => 'comments/preview', :locals => { :comments => @comments })) %>");
+<% if flash[:error].present? %>
+$(".alert-success").hide(500);
+$(".alert-warning").html("<%= escape_javascript( flash[:error]) %>").show(500);
+<% else %>
+$(".alert-warning").hide(500);
+$(".alert-success").html("<%= escape_javascript( flash[:notice]) %>").show(500);
+<% end %>

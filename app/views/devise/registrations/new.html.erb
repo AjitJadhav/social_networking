@@ -5,8 +5,9 @@
     <%= form_for(@user) do |f| %>
       <%= devise_error_messages! %>
 
-      <div><%= f.label :name %><br />
-      <%= f.text_field :name, autofocus: true %></div>
+      <div><%= f.label :name %>
+      <%= f.text_field :first_name, autofocus: true, size: 15, placeholder: 'first name' %>
+      <%= f.text_field :last_name, autofocus: true, size: 15, placeholder: 'last name' %></div>
       
       <div><%= f.label :Date_of_birth %><br />
       <%= f.date_select :date_of_birth, autofocus: true, :order => [:day, :month, :year], :start_year => 1980, :end_year => 2010 %></div>

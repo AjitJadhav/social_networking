@@ -28,5 +28,7 @@ module ApplicationHelper
   def is_liked?(post)
     post.likes.where("user_id = ?", current_user).first.present?
   end
+  
+  
 end
 

@@ -12,7 +12,7 @@ class FriendsController < ApplicationController
       flash[:notice] = "Friend request has been sent."
       redirect_to users_path
     else  
-      flash[:notice] = "Friend request not sent!!! try later"
+      flash[:error] = "Friend request not sent. Please try again later"
     end
   end
   
@@ -20,10 +20,10 @@ class FriendsController < ApplicationController
     current_friend_id = Friend.select(:id).where("user_id = ? and friend_with = ?", params[:friend_id], current_user.id)
     if Friend.where("friend_with = ? and user_id = ? and request_accepted = ?",current_user.id, params[:friend_id], true).present?
       Friend.delete(current_friend_id) 
-      flash[:notice] = "friend removed from your list."
+      flash[:alert] = "Friend removed from your list."
     else
       Friend.update(current_friend_id,:request_accepted => "true")
-      flash[:notice] = "friend request accepted."
+      flash[:notice] = "Friend request accepted."
     end
     redirect_to friends_path
   end

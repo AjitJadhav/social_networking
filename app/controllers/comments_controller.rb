@@ -6,12 +6,9 @@ class CommentsController < ApplicationController
     @post = Post.where(:id => params[:post_id]).first
     @comment = @post.comments.new(:user_id => current_user.id, :status => params[:status], :image => params[:image])
     if @comment.save
-    
       flash[:notice] = "Comment created."
-      
     else
-      flash[:notice] = "Please try later."
-      
+      flash[:error] = "Comment not created. Please try again later."
     end  
     @comments = @post.comments
   end

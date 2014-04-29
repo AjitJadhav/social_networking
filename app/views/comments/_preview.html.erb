@@ -3,7 +3,7 @@
     <div class="container">  
       <div class="col-md-12">
         <div class="col-md-2">
-          <%= comment.user.name if comment.user.present? %> ->
+          <%= comment.user.first_name if comment.user.present? %> ->
             <%= comment.status if comment.status.present? %>
             <%= image_tag comment.image, :height => '100', :width => '200' if comment.image.present? %>
         </div>
@@ -14,7 +14,7 @@
           </div>
           <div class='col-md-2'>
             <% if comment.user.id == current_user.id %>
-              <%= link_to 'Destroy', post_path(comment), :method => :delete %>
+              <%= link_to 'Destroy', post_path(comment), :method => :delete, :confirm => "Click ok if you want to delete" %>
             <% end %>  
           </div>
         </div>  

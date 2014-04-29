@@ -15,13 +15,13 @@
     <%= form_for @current_user,:url => respond_path(:friend_id => friend.id ) do |f| %>
       <tr>
         <td><%= friend.id %></td>
-        <td><%= friend.name %></td>
+        <td><%= friend.first_name + " " + friend.last_name.to_s %></td>
         <td><%= friend.date_of_birth %></td>
         <td><%= friend.email %></td>
         <td>
           <% text = is_friend?(friend)%>
           <div class="actions">
-            <%= f.submit value="#{text}", :name => "#{text}"%>
+            <%= f.submit value="#{text}", :name => "#{text}" %>
           </div>
         </td>
       </tr>
