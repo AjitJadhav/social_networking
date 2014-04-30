@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   before_filter :authenticate_user!
-  before_filter :add_friends, :only => :index
+  before_filter :add_friends, :only => [:index, :search]
   
   def index
     @users = User.where("id NOT IN (?)", @friend_ids)
@@ -60,6 +60,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def search
+    @found = User.where("first_name like ?", params[:search_name]) 
+    respond_to do |format|
+      format.js
+    end
+  end
+  
   private
   
   def add_friends
@@ -67,7 +74,7 @@ class UsersController < ApplicationController
     f2 = current_user.pending_friend_request.pluck(:friend_with)
     @friend_ids = f1 + f2
     @friend_ids << current_user.id
-    @users = User.where("id NOT IN (?)", @friend_ids)
+    
   end
  
   

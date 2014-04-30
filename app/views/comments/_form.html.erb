@@ -1,26 +1,27 @@
 <% if user_signed_in? %>
-  <table> 
-    <tr>
-      <td>
-        <%= form_tag(post_comments_path(post_id), :method => 'post', :multipart => true, :remote => true) do %>
+  <%= form_tag(post_comments_path(post_id), :method => 'post', :multipart => true, :remote => true) do %>    
+    <table> 
+      <tr>
+        <td>
           <div class="field">
             <%= label_tag(:status, "Comment") %>&nbsp;:
             <%= text_field_tag(:status,'', size: 40, placeholder: 'Comment on this post....' ) %>
           </div>
-        
-        <div class="field">
-          <%= label_tag(:image,"attach_picture") %>:
-          <%= file_field_tag(:image) %>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td colspan='2'>
-        <div class="actions">
-          <input type="submit" class="btn btn-info btn-sm" value="comment"/>
-          <% end %>
-        </div>
-      </td>
-    </tr> 
-  </table>
+         
+          <div class="field">
+            <%= label_tag(:image,"attach_picture") %>:
+            <%= file_field_tag(:image) %>
+          </div>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan='2'>
+          <div class="actions">
+            <input type="submit" class="btn btn-info btn-sm" value="comment"/>
+          </div>
+        </td>
+      </tr> 
+    </table>
+  <% end %>
 <% end %>

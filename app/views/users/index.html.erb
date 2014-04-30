@@ -1,9 +1,15 @@
-<%= render 'home/header1' %>
+<%= render 'home/header' %>
 </br></br></br></br>
 <p id="notice"><%= notice %></p>
+    
+    <%= label_tag(:search) %>
+    <%= text_field_tag(:search,'',size: 20, placeholder: 'Search your friend', :id => 'keyword')%>
+    <button id='search' onclick="search();"> Search </button>
+    
+    
 <h2>People you may know.</h2>
 
-<table class='table table-striped'>
+<div class='table table-striped'>
   <tr>
     <th>id  </th>
     <th>Name</th>
@@ -11,25 +17,18 @@
     <th>Email</th>
     <th></th>
   </tr>
+  <div id="searched_items">
+    <%= render :partial => 'friends', :locals => { :users => @users } %>
+  </div>
+</div>
 
-  <% @users.each do |user| %>
+<script type="text/javascript" charset="UTF-8">  
+  $(document).on("click", "#search", function(){
+    var search_keyword = document.getElementById("keyword").value
+    $.ajax({
+      url: "/search/"+search_keyword, type: "GET"
+    });
+  
+  });
     
-    <% if is_not_requested?(user) %>
-      <%= form_for @current_user,:url => add_friend_path(:friend_id => user.id) do |f| %>
-        <tr>
-          <td><%= user.id %> </td>
-          <td><%= user.first_name + " " + user.last_name.to_s %></td>
-          <td><%= user.date_of_birth %></td>
-          <td><%= user.email %></td>
-          <td>
-            <div class="actions">
-              <%= f.submit value="Add Friend" %>
-            </div>
-          </td>
-        </tr>
-      <% end %>
-    <% end %>    
-  <% end %>
-</table>
-
-
+</script>

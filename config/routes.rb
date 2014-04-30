@@ -27,6 +27,7 @@ SocialNetworking::Application.routes.draw do
   put "posts/:post_id/unlike", :to => "likes#unlike", :as => :unlike
   put "/respond", :to => "friends#respond_request", :as => :respond
   put "/add_friend", :to => "friends#add_friend", :as => :add_friend
+  get "search/:search_name", :to => "users#search", :as => :search_friends
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
