@@ -61,7 +61,8 @@ class UsersController < ApplicationController
   end
 
   def search
-    @found = User.where("id NOT IN (?) AND first_name ilike ? OR last_name ilike ? ", @friend_ids, "%#{params[:search_name]}%", "%#{params[:search_name]}%") 
+    
+    @found = User.search("#{params[:search_name]}", @friend_ids) 
     if @found.present?
     respond_to do |format|
       format.js

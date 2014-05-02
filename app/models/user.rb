@@ -24,5 +24,10 @@ class User < ActiveRecord::Base
   def customize_name
     self.first_name = self.first_name.titleize
     self.last_name = self.last_name.titleize
-  end 
+  end
+  
+  scope :search, ->(search_keyword, friend_ids){
+    User.where("id NOT IN (?) AND first_name ilike ? OR last_name ilike ? ", friend_ids, "%#{search_keyword}%", "%#{search_keyword}%")
+  }
+   
 end

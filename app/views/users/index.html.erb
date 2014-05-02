@@ -16,21 +16,26 @@
 
 
 <script type="text/javascript" charset="UTF-8">  
+  if($('#keyword').val() ==  "") {
+    $("#searched_items").html("<%= escape_javascript( render(:partial => 'users/friends', :locals => { :users => @users }))%>");
+    $('#search').attr('disabled', true);
+  }
   $(document).on("click", "#search", function(){
     var search_keyword = $("#keyword").val();
-    $.ajax({
-      url: "/search/"+search_keyword, type: "POST"
-    });
+    search_method(search_keyword)
   });
   
-  $(document).on("keydown", "#keyword", function(){
-      if(event.keyCode == 13 || ($.trim($("#keyword").val()).length) >= 2){
-        var search_keyword = $("#keyword").val();
-        $.ajax({
-          type: 'POST',
-          url: "/search/"+search_keyword
-        });
-      }
+  function search_method(keyword){
+    $.ajax({
+      url: "/search/"+keyword, type: "POST"
+    });
+  };
+  
+  $(document).on("keydown", "#keyword", function(e){
     
+    if( e.keyCode == 13 || ($.trim($("#keyword").val())).length >= 3 ){
+      var search_keyword = $("#keyword").val();
+      search_method(search_keyword)
+    }
   });
 </script>
