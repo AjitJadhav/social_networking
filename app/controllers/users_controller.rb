@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_filter :add_friends, :only => [:index, :search]
   
   def index
-    @users = User.where("id NOT IN (?)", @friend_ids)
+    
   end
 
   def show
@@ -61,9 +61,17 @@ class UsersController < ApplicationController
   end
 
   def search
-    @found = User.where("first_name like ?", params[:search_name]) 
+    @found = User.where("id NOT IN (?) AND first_name ilike ? OR last_name ilike ? ", @friend_ids, "%#{params[:search_name]}%", "%#{params[:search_name]}%") 
+    if @found.present?
     respond_to do |format|
       format.js
+    end  
+    else
+      flash.now[:notice] = "User not found"
+      @found = @users
+      respond_to do |format|
+        format.js
+      end
     end
   end
   
@@ -74,7 +82,7 @@ class UsersController < ApplicationController
     f2 = current_user.pending_friend_request.pluck(:friend_with)
     @friend_ids = f1 + f2
     @friend_ids << current_user.id
-    
+    @users = User.where("id NOT IN (?)", @friend_ids)
   end
  
   

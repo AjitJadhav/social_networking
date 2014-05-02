@@ -1,17 +1,38 @@
 <body>
-<% if user_signed_in? %>
-  
-  </br></br></br></br>
-  
-  <%= render partial: 'flash', :locals => { flash: flash } %>
-  
-  <%= render 'header'%>
-  
-  <%= render 'form' %>
-  
-  <%= render 'posts/post' %>
-  
-  <%= render 'footer' %>
-  
-<% end %>
+  <% if user_signed_in? %>
+    
+    </br></br></br></br>
+    
+    <%= render partial: 'flash', :locals => { flash: flash } %>
+      
+    <%= render 'header'%>
+    
+    <%= render 'form' %>
+    
+    <div class="container">
+      <div class='row-fluid'>  
+        <div class="span6 right">
+          <%= label_tag(:search) %> <br/ >
+          <%= text_field_tag(:search,'',size: 20, placeholder: 'Search posts....', :id => 'keyword') %>
+          <button id='search' > Search </button>
+        </div>
+      </div>  
+    </div>  
+    
+    <div id="search_post">
+      <%= render partial: 'posts/post' %>
+    </div>
+    
+    <%= render 'footer' %>
+    
+  <% end %>
 </body>
+
+<script type="text/javascript" charset="UTF-8">
+  $(document).on("click", "#search", function(){
+    var search_keyword = $("#keyword").val();
+    $.ajax({
+      url: "/search_post/"+search_keyword, type: "POST"
+    });
+  });
+</script>

@@ -1,8 +1,10 @@
 class HomeController < ApplicationController
   before_filter :authenticate_user! 
-  before_filter :all_friends_posts, :only => :index
+  before_filter :all_friends_posts, :only => [:index, :search]
  
   def index
+    @posts_to_show = @posts
+   
   end
   
   def create
@@ -12,6 +14,19 @@ class HomeController < ApplicationController
   end 
   
   def new
+  end
+  
+  def search
+    @posts.each do |post|
+      if post.user.first_name == params[:search_post]
+        @posts_to_show = post.user.posts
+      
+      end
+      
+      respond_to do |format|
+          format.js
+        end
+    end
   end
   
   private 

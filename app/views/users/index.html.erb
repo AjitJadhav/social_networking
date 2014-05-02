@@ -3,32 +3,34 @@
 <p id="notice"><%= notice %></p>
     
     <%= label_tag(:search) %>
-    <%= text_field_tag(:search,'',size: 20, placeholder: 'Search your friend', :id => 'keyword')%>
-    <button id='search' onclick="search();"> Search </button>
+    <%= text_field_tag(:search,'',size: 20, placeholder: 'Search your friend', :id => 'keyword') %>
+    <button id='search' > Search </button>
     
     
 <h2>People you may know.</h2>
 
-<div class='table table-striped'>
-  <tr>
-    <th>id  </th>
-    <th>Name</th>
-    <th>Date of birth</th>
-    <th>Email</th>
-    <th></th>
-  </tr>
-  <div id="searched_items">
-    <%= render :partial => 'friends', :locals => { :users => @users } %>
-  </div>
+  
+<div id="searched_items">
+  <%= render :partial => 'friends', :locals => { :users => @users } %>
 </div>
+
 
 <script type="text/javascript" charset="UTF-8">  
   $(document).on("click", "#search", function(){
-    var search_keyword = document.getElementById("keyword").value
+    var search_keyword = $("#keyword").val();
     $.ajax({
-      url: "/search/"+search_keyword, type: "GET"
+      url: "/search/"+search_keyword, type: "POST"
     });
-  
   });
+  
+  $(document).on("keydown", "#keyword", function(){
+      if(event.keyCode == 13 || ($.trim($("#keyword").val()).length) >= 2){
+        var search_keyword = $("#keyword").val();
+        $.ajax({
+          type: 'POST',
+          url: "/search/"+search_keyword
+        });
+      }
     
+  });
 </script>

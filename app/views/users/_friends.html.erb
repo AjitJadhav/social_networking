@@ -1,18 +1,27 @@
-
-<% users.each do |user| %>
-  <% if is_not_requested?(user) %>
-    <%= form_for @current_user,:url => add_friend_path(:friend_id => user.id) do |f| %>
+<table class='table table-striped'>  
+    <tr>
+      <th>id  </th>
+      <th>Name</th>
+      <th>Date of birth</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+  <% users.each do |user| %>
+    <% if is_not_requested?(user) %>
       <tr>
-        <td><%= user.id %> </td>
-        <td><%= user.first_name + " " + user.last_name.to_s %></td>
-        <td><%= user.date_of_birth %></td>
-        <td><%= user.email %></td>
-        <td>
-          <div class="actions">
-            <%= f.submit value="Add Friend" %>
-          </div>
-        </td>
-      </tr>
+          <td><%= user.id %> </td>
+          <td><%= user.first_name + " " + user.last_name.to_s %></td>
+          <td><%= user.date_of_birth %></td>
+          <td><%= user.email %></td>
+          <td>
+           <%= form_for @current_user,:url => add_friend_path(:friend_id => user.id), :method => :post do |f| %>
+              <div class="actions">
+                <%= f.submit value="Add Friend" %>
+              </div>
+            <% end %>
+          </td>
+        </tr>
+     
     <% end %>
   <% end %>
-<% end %>
+</table>
