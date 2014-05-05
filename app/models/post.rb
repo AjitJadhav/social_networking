@@ -20,8 +20,8 @@ class Post < ActiveRecord::Base
     Post.where("user_id in (?) AND is_comment = ?", friend_ids, false)
   }
 
-  scope :all_images, ->(friend_ids) { 
-    Post.where("id not in (?) and is_comment = ?", Post.all_status(friend_ids).where(:image => nil),false)
+  scope :all_images, ->(friend_ids) {
+    Post.where("id not in (?) AND user_id in (?) AND is_comment = ?", Post.all_status(friend_ids).where(:image => nil), friend_ids, false)
   }
 
 end
