@@ -1,7 +1,11 @@
 SocialNetworking::Application.routes.draw do
   devise_for :users
   
-  resources :home 
+  resources :home do
+    member do
+      post 'search'
+    end
+  end
   
   resources :users do
     collection do
@@ -28,7 +32,7 @@ SocialNetworking::Application.routes.draw do
   put "/respond", :to => "friends#respond_request", :as => :respond
   post "/add_friend", :to => "friends#add_friend", :as => :add_friend
   post "search/:search_name", :to => "users#search", :as => :search_friends
-  post "search_post/:search_post", :to => "home#search", :as => :search_posts 
+  #post "search_post/:search_post", :to => "home#search", :as => :search_posts 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

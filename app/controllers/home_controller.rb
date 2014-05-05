@@ -16,13 +16,13 @@ class HomeController < ApplicationController
   end
   
   def search
-    user_ids = @posts.pluck(:user_id).uniq  
-    user = User.where("first_name ilike ? AND id in (?)", "%#{params[:search_post]}%", user_ids).first
-    if user.present?
-      posts_of_user = user.posts.where("is_comment = ?", false).order("created_at DESC") 
+    if params[:id].to_i == 0
+      @posts_to_show = @posts
+    elsif params[:id].to_i == 1
+      @posts_to_show = Post.all_status(@friend_ids).where(:image => nil)
+    else
+      @posts_to_show = Post.all_images(@friend_ids)
     end
-    status_containing_keyword = Post.where("user_id in (?) and status ilike ?", @friend_ids, "%#{params[:search_post]}%")
-    @posts_to_show = (posts_of_user.to_a + status_containing_keyword.to_a).uniq
   end
   
   

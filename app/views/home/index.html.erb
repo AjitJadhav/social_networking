@@ -12,10 +12,8 @@
     <div class="container">
       <div class='row-fluid'>  
         <div class="span6 pull-right">
-          <%= label_tag(:search) %> <br/ >
-          <%= text_field_tag(:search,'',size: 20, placeholder: 'Search posts....', :id => 'keyword') %>
-          
-          <li><%= select_tag :posts, options_for_select([["All", 0], ["Only Status", 1], ["Only Pics", 2]]) %>
+          <%= label_tag(:search_posts_status_or_images) %> <br/ >          
+          <%= select_tag :posts, options_for_select([["All", 0], ["Only Status", 1], ["Only Pics", 2]]), :id => "search_posts" %>
           <button id='search' > Go </button>
         </div>
       </div>  
@@ -34,9 +32,9 @@
 
 <script type="text/javascript" charset="UTF-8">
   $(document).on("click", "#search", function(){
-   var search_keyword = $("#select_posts").val();
-   $.ajax({
-     url: "/search_post/"+search_keyword, type: "POST"
-   });
+    var id = $("#search_posts").val();
+    $.ajax({
+      url: "/home/"+id+"/search", type: "POST"
+    });
   });
 </script>
